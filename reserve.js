@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(`reservecar.php?field=${dropdown}`)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error(`Failed to fetch ${dropdown}: ${response.statusText}`);
                 }
                 return response.json();
             })
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         selectElement.appendChild(option);
                     });
                 } else {
-                    console.error(`No data available for ${dropdown}`);
+                    console.warn(`No data available for ${dropdown}`);
                 }
             })
             .catch(error => console.error(`Error fetching data for ${dropdown}:`, error));
@@ -32,16 +32,21 @@ document.addEventListener("DOMContentLoaded", () => {
     ['yes', 'no'].forEach(value => {
         const option = document.createElement("option");
         option.value = value;
-        option.textContent = value.charAt(0).toUpperCase() + value.slice(1);  
+        option.textContent = value.charAt(0).toUpperCase() + value.slice(1);
         turboSelect.appendChild(option);
     });
 
     // Fetch car models independently
     fetch(`reservecar.php?field=car_model`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to fetch car_model: ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
             const modelSelect = document.getElementById("car_model");
-            modelSelect.innerHTML = '<option value="" disabled selected>Select a model</option>';  
+            modelSelect.innerHTML = '<option value="" disabled selected>Select a model</option>';
 
             data.forEach(model => {
                 const option = document.createElement("option");
@@ -53,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => console.error('Error fetching car models:', error));
 
     document.getElementById("reserveform").addEventListener("submit", function (event) {
-        event.preventDefault();  
+        event.preventDefault();
 
         // Validate dates
         const pickupDate = new Date(document.getElementById("pickup_date").value);
@@ -61,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const today = new Date();
 
         // Check if pickup date is in the future
-        if (pickupDate < today) {
+        if (pickupDate <= today) {
             alert("Pickup date must be in the future.");
             return;
         }
@@ -77,13 +82,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Submit form if validation passes
         fetch("reservecar.php", {
             method: "POST",
-            body: formData  
+            body: formData
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error(`Failed to submit reservation: ${response.statusText}`);
             }
-            return response.json();  
+            return response.json();
         })
         .then(results => {
             if (results.success) {
@@ -94,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => {
             console.error('Error submitting form:', error);
-            alert('There was an error processing your reservation. Please try again.');
+            alert(`There was an error processing your reservation. Please try again.\nDetails: ${error.message}`);
         });
     });
 });

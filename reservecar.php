@@ -1,15 +1,25 @@
 <?php
 header('Content-Type: application/json');
 
-function getDbConnection() {
+function getDbConnection()
+{
     $conn = new mysqli("localhost", "root", "", "car_rental");
     if ($conn->connect_error) {
-        die(json_encode(["error" => "Database connection failed", "details" => $conn->connect_error]));
+        error_log("Database connection failed: " . $conn->connect_error);
+        die(json_encode(["error" => "Database connection failed"]));
     }
     return $conn;
 }
 
-function checkReservationOverlap($conn, $car_id, $office_id, $pickup_date, $return_date) {
+function logError($message)
+{
+    error_log($message);
+    return json_encode(["error" => $message]);
+}
+
+
+function checkReservationOverlap($conn, $car_id, $office_id, $pickup_date, $return_date)
+{
     $query = "
     SELECT * 
     FROM reservation 
@@ -31,7 +41,8 @@ function checkReservationOverlap($conn, $car_id, $office_id, $pickup_date, $retu
     return $result->num_rows > 0;
 }
 
-function validateCarStatus($conn, $car_id, $office_id) {
+function validateCarStatus($conn, $car_id, $office_id)
+{
     $query = "SELECT status, office_id FROM car WHERE car_id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $car_id);
@@ -53,7 +64,16 @@ function validateCarStatus($conn, $car_id, $office_id) {
 
     return true;
 }
-function handleGetRequest($conn) {
+function handleGetRequest($conn)
+{
+    if (!isset($_GET['field'])) {
+        echo logError("Field parameter missing");
+        exit;
+    }
+    $validFields = ['branch', 'car_brand', 'car_model', 'year', 'color', 'turbo', 'ccs'];
+
+
+
     if (!isset($_GET['field'])) {
         echo json_encode(["error" => "Field parameter missing"]);
         exit;
@@ -61,7 +81,10 @@ function handleGetRequest($conn) {
 
     $field = $_GET['field'];
     $validFields = ['branch', 'car_brand', 'car_model', 'year', 'color', 'turbo', 'ccs'];
-
+    if (!in_array($field, $validFields)) {
+        echo logError("Invalid field");
+        exit;
+    }
     if (!in_array($field, $validFields)) {
         echo json_encode(["error" => "Invalid field"]);
         exit;
@@ -107,7 +130,16 @@ function handleGetRequest($conn) {
         echo json_encode(["error" => "No data found for the requested field"]);
     }
 }
-function handlePostRequest($conn) {
+function handlePostRequest($conn)
+{
+    $requiredFields = ['email', 'pickup_date', 'return_date', 'payment_method', 'branch'];
+    foreach ($requiredFields as $field) {
+        if (empty($_POST[$field])) {
+            echo logError("$field is required.");
+            exit;
+        }
+    }
+
     $conditions = [];
     $params = [];
     $types = "";
@@ -117,6 +149,10 @@ function handlePostRequest($conn) {
         // Validate the email format
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             echo json_encode(["error" => "Invalid email address."]);
+            exit;
+        }
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            echo logError("Invalid email address.");
             exit;
         }
 
@@ -147,7 +183,7 @@ function handlePostRequest($conn) {
         $params[] = $_POST['branch'];
         $types .= "s";
     }
-    
+
     if (!empty($_POST['brand'])) {
         $conditions[] = "c.brand = ?";
         $params[] = $_POST['brand'];
@@ -178,14 +214,14 @@ function handlePostRequest($conn) {
         $params[] = $_POST['ccs'];
         $types .= "i";
     }
-    
+
     // Query for cars with applied conditions
     $carQuery = "
     SELECT car_id, price 
     FROM car c
     WHERE c.status = 'active'
     ";
-    
+
     if (!empty($conditions)) {
         $carQuery .= " AND " . implode(" AND ", $conditions);
     }
@@ -206,7 +242,7 @@ function handlePostRequest($conn) {
         exit;
     }
 
-    
+
     // Find office_id based on location
     if (!empty($_POST['location'])) {
         $location = $_POST['location'];
@@ -241,19 +277,26 @@ function handlePostRequest($conn) {
         echo json_encode(["error" => "Pickup and return dates are required."]);
         exit;
     }
-    $pickup_date = $_POST['pickup_date'];
-    $return_date = $_POST['return_date'];
-
-    if (strtotime($pickup_date) <= time()) {
+    
+    $pickup_date = DateTime::createFromFormat('Y-m-d', $_POST['pickup_date']);
+    $return_date = DateTime::createFromFormat('Y-m-d', $_POST['return_date']);
+    
+    if (!$pickup_date || !$return_date) {
+        echo json_encode(["error" => "Invalid date format."]);
+        exit;
+    }
+    
+    // Now, $pickup_date and $return_date are DateTime objects, and you can use them for comparisons
+    if ($pickup_date <= new DateTime()) {
         echo json_encode(["error" => "Pickup date must be in the future."]);
         exit;
     }
-
-    if (strtotime($return_date) <= strtotime($pickup_date)) {
+    
+    if ($return_date <= $pickup_date) {
         echo json_encode(["error" => "Return date must be after the pickup date."]);
         exit;
     }
-
+    
     if (checkReservationOverlap($conn, $car_id, $office_id, $pickup_date, $return_date)) {
         echo json_encode(["error" => "This car is already reserved for the selected dates."]);
         exit;
@@ -263,15 +306,16 @@ function handlePostRequest($conn) {
     $result = $conn->query("SELECT COUNT(*) AS total FROM reservation");
     $row = $result->fetch_assoc();
     $reservation_id = $row['total'] + 1;
-
-    // Insert reservation
+    $formatted_pickup_date = $pickup_date->format('Y-m-d');
+    $formatted_return_date = $return_date->format('Y-m-d');
+    
     $insertReservationQuery = "
         INSERT INTO reservation (reservation_id, car_id, office_id, customer_id, reservation_date, pickup_date, return_date, status)
         VALUES (?, ?, ?, ?, NOW(), ?, ?, 'active')
     ";
     $stmt = $conn->prepare($insertReservationQuery);
-    $stmt->bind_param("iiisss", $reservation_id, $car_id, $office_id, $customer_id, $pickup_date, $return_date);
-
+    $stmt->bind_param("iiisss", $reservation_id, $car_id, $office_id, $customer_id, $formatted_pickup_date, $formatted_return_date);
+    
     if (!$stmt->execute()) {
         echo json_encode(["error" => "Failed to create reservation.", "details" => $stmt->error]);
         exit;
@@ -315,4 +359,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 $conn->close();
-?>
