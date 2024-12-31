@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Search</title>
+        <link rel="stylesheet" href="forms.css">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    </head>
+
+    <body class="background">
+        <header>
+            <a href="#" class="logo"><img src="icon.png" alt="Logo"></a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+            <ul class="navbar">
+                <li><a href="adminaddcar.html">Add/Update</a></li>
+                <li><a href="adminreport.html">Report</a></li>
+                <li><a href="main.html">Log Out</a></li>
+            </ul>
+        </header>
+        <div class="background">
+            <div class="wrapper">
+                <form action="#" method="POST"name="searchform">
+                    <div class="title">
+                        Search Date
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Pickup Date</label>
+                            <input type="date" name="pickup_date"
+                                id="pickup_date">
+                        </div>
+                        <div class="field">
+                            <label>Return Date</label>
+                            <input type="date" name="return_date"
+                                id="return_date">
+                        </div>
+                    </div>
+                    <div class="title">
+                        Search Car
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Car Brand</label>
+                            <select name="car_brand" id="car_brand">
+                                <option value disabled selected>Select a
+                                    brand</option>
+                                <option value="audi">AUDI</option>
+                                <option value="bmw">BMW</option>
+                                <option value="gac">GAC</option>
+                                <option value="jac">JAC</option>
+                                <option value="hyundai">HYUNDAI</option>
+                                <option value="toyota">TOYOTA</option>
+                                <option value="kia">KIA</option>
+                                <option value="seat">SEAT</option>
+                                <option value="peugeot">PEUGEOT</option>
+                                <option value="opel">OPEL</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Car Model</label>
+                            <select name="car_model" id="car_model">
+                                <option value disabled selected>Select a
+                                    model</option>
+                                <option value="sedan">Sedan</option>
+                                <option value="suv">SUV</option>
+                                <option value="truck">Truck</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Year</label>
+                            <select name="year" id="year">
+                                <option value disabled selected>Select
+                                    year</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Color</label>
+                            <select name="color" id="color">
+                                <option value disabled selected>Select a
+                                    color</option>
+                                <option value="white">White</option>
+                                <option value="silver">Silver</option>
+                                <option value="grey">Grey</option>
+                                <option value="blue">Blue</option>
+                                <option value="red">Red</option>
+                                <option value="black">Black</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Turbo</label>
+                            <select name="turbo" id="turbo">
+                                <option value disabled selected>Select
+                                    option</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>CCs</label>
+                            <select name="ccs" id="ccs">
+                                <option value disabled selected>Select
+                                    CC</option>
+                                <option value="1000">1000</option>
+                                <option value="1200">1200</option>
+                                <option value="1400">1400</option>
+                                <option value="1600">1600</option>
+                                <option value="2000">2000</option>
+                                <option value="2400">2400</option>
+                                <option value="2800">2800</option>
+                                <option value="3500">3500</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Car Status</label>
+                            <select name="status" id="status">
+                                <option value disabled selected>Select
+                                    status</option>
+                                <option value></option>
+                                <option value></option>
+                                <option value></option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Branch</label>
+                            <select name="branch" id="branch" required>
+                                <option value disabled selected>Select
+                                    branch</option>
+                                <option value>Branch</option>
+                                <option value="alexandria">Alexandria</option>
+                                <option value></option>
+                                <option value></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Car Plate</label>
+                            <input type="text" name="plate" id="plate"
+                                placeholder="Enter car plate">
+                        </div>
+                    </div>
+                    <div class="title">
+                        Search Customer
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>First Name</label>
+                            <input type="text" name="first-name" id="first-name"
+                                placeholder="Enter your first name">
+                        </div>
+                        <div class="field">
+                            <label>Last Name</label>
+                            <input type="text" name="last-name" id="last-name"
+                                placeholder="Enter your last name">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Email Address</label>
+                            <input type="email" name="email" id="email"
+                                placeholder="Enter your email">
+                        </div>
+                        <div class="field">
+                            <label>Date of Birth</label>
+                            <input type="date" name="dob" id="dob">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Address</label>
+                            <input type="text" name="address" id="address"
+                                placeholder="Enter your address">
+                        </div>
+                        <div class="field">
+                            <label>Phone Number</label>
+                            <input type="tel" name="phone" id="phone"
+                                placeholder="Enter your phone number">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+                <section class="field" id="searchresults">
+                    <div class="title">
+                        Search Results
+                    </div>
+                         <div class="results-container">
+                        <!-- results will be printed here using js script "i guess" -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </body>
+
+</html>

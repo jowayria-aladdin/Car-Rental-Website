@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Report</title>
+        <link rel="stylesheet" href="forms.css">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    </head>
+
+    <body class="background">
+        <header>
+            <a href="#" class="logo"><img src="icon.png" alt="Logo"></a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+            <ul class="navbar">
+                <li><a href="adminaddcar.html">Add/Update</a></li>
+                <li><a href="adminsearch.html">Search</a></li>
+                <li><a href="main.html">Log Out</a></li>
+            </ul>
+        </header>
+        <div class="background">
+            <div class="wrapper">
+                <form action="#" method="POST"name="all_report_form">
+                    <div class="title">
+                        Customer and Car Reservations Report
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Start Date</label>
+                            <input type="date" name="start_date"
+                                id="start_date">
+                        </div>
+                        <div class="field">
+                            <label>End Date</label>
+                            <input type="date" name="end_date"
+                                id="end_date">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+                <form action="#" method="POST"name="car_report_form">
+                    <div class="title">
+                        Car Reservations Report
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Start Date</label>
+                            <input type="date" name="start_date"
+                                id="start_date">
+                        </div>
+                        <div class="field">
+                            <label>End Date</label>
+                            <input type="date" name="end_date"
+                                id="end_date">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+                <form action="#" method="POST"name="customer_report_form">
+                    <div class="title">
+                        Customer Information Report
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>First Name</label>
+                            <input type="text" name="first-name" id="first-name"
+                                placeholder="Enter your first name">
+                        </div>
+                        <div class="field">
+                            <label>Last Name</label>
+                            <input type="text" name="last-name" id="last-name"
+                                placeholder="Enter your last name">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Email Address</label>
+                            <input type="email" name="email" id="email"
+                                placeholder="Enter your email">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+                <form action="#" method="POST"name="status_report_form">
+                    <div class="title">
+                        Car Status Report
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Pick a Date</label>
+                            <input type="date" name="date"
+                                id="date">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+                <form action="#" method="POST"name="payment_report_form">
+                    <div class="title">
+                        Payments Report
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Start Date</label>
+                            <input type="date" name="start_date"
+                                id="start_date">
+                        </div>
+                        <div class="field">
+                            <label>End Date</label>
+                            <input type="date" name="end_date"
+                                id="end_date">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+                <section class="field" id="searchresults">
+                    <div class="title">
+                        Search Results
+                    </div>
+                         <div class="results-container">
+                        <!-- results will be printed here using js script "i guess" -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Sign Up</title>
+        <link rel="stylesheet" href="forms.css">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <script>
+                function signup_Validation() {
+                  var fusername = document.forms["signupform"]["first-name"].value;
+                  var lusername = document.forms["signupform"]["last-name"].value;
+                  var user = document.forms["signupform"]["email"].value;
+                  var cuser = document.forms["signupform"]["confirm-email"].value;
+                  var emailreg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+                  var pass = document.forms["signupform"]["password"].value;
+                  var cpass = document.forms["signupform"]["confirm-password"].value;
+                  var phone = document.forms["signupform"]["phone"].value;
+                  var dob = document.forms["signupform"]["dob"].value;
+                  var adress = document.forms["signupform"]["address"].value;
+                  var phonereg = /^[0-9]{10,}$/;
+                  if (fusername == null || fusername == "") {
+                    alert("Please enter a first name.");
+                    return false;
+                  }
+                  if (lusername == null || lusername == "") {
+                    alert("Please enter a last name.");
+                    return false;
+                  }
+                  if (user == null || user == "") {
+                    alert("Please enter an email.");
+                    return false;
+                  }
+                  if (user.search(emailreg) == -1) {
+                    alert("Please enter a valid email address.");
+                    return false;
+                  }
+                  if (cuser.search(emailreg) == -1) {
+                    alert("Please enter a valid email address.");
+                    return false;
+                  }
+                  if (phone == null || phone == "") {
+                    alert("Please enter a phone number.");
+                    return false;
+                  }
+                  if (phone.search(phonereg) == -1) {
+                    alert("Please enter a valid phone number.");
+                    return false;
+                  }
+                  if (pass == null || pass == "") {
+                    alert("Please enter a password.");
+                    return false;
+                  }
+                  if (cpass == null || cpass == "") {
+                    alert("Please confirm your password.");
+                    return false;
+                  }
+                  if (cpass != pass) {
+                    alert("Password and confirm password aren't matched.");
+                    return false;
+                  }
+                  if (cuser != user) {
+                    alert("email and confirm email aren't matched.");
+                    return false;
+                  }
+                  if (dob == null || dob == "") {
+                    alert("Please enter your date of birth.");
+                    return false;
+                  }
+                  if (adress == null || adress == "") {
+                    alert("Please enter an adress.");
+                    return false;
+                  }
+                  var dobDate = new Date(dob);
+                  var currentDate = new Date();
+                 if (dobDate >= currentDate) {
+                 alert("Please enter a valid date.");
+                    return false;
+                  }
+                  var age = currentDate.getFullYear() - dobDate.getFullYear();
+                  var monthDiff = currentDate.getMonth() - dobDate.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < dobDate.getDate())) {
+                age--; 
+                }
+        if (age < 18) {
+            alert("You must be 18 years or older to register.");
+            return false;
+        }
+
+                  return true;
+                }
+              </script>
+    </head>
+    <body class="background">
+        <header>
+            <a href="#" class="logo"><img src="icon.png" alt="Logo"></a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+            <ul class="navbar">
+                <li><a href="main.html">Home</a></li>
+                <li><a href="login.html">Log In</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+            </ul>
+        </header>
+        <div class="background">
+            <div class="wrapper">
+                <div class="title">
+                    Sign Up Form
+                </div>
+                <form action="mainlog.html" method="POST" name="signupform"
+                    onsubmit="return signup_Validation();">
+                    <div class="field-group">
+                        <div class="field">
+                            <label>First Name</label>
+                            <input type="text" name="first-name" id="first-name"
+                                placeholder="Enter your first name">
+                        </div>
+                        <div class="field">
+                            <label>Last Name</label>
+                            <input type="text" name="last-name" id="last-name"
+                                placeholder="Enter your last name">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Email Address</label>
+                            <input type="email" name="email" id="email"
+                                placeholder="Enter your email">
+                        </div>
+                        <div class="field">
+                            <label>Confirm Email Address</label>
+                            <input type="email" name="confirm-email"
+                                id="confirm-email"
+                                placeholder="Enter your email">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Password</label>
+                            <input type="password" name="password" id="password"
+                                placeholder="Enter your password">
+                        </div>
+                        <div class="field">
+                            <label>Confirm Password</label>
+                            <input type="password" name="confirm-password"
+                                id="confirm-password"
+                                placeholder="Enter your password">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Address</label>
+                            <input type="text" name="address" id="address"
+                                placeholder="Enter your address">
+                        </div>
+                        <div class="field">
+                            <label>Date of Birth</label>
+                            <input type="date" name="dob" id="dob">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field">
+                            <label>Phone Number</label>
+                            <input type="tel" name="phone" id="phone"
+                                placeholder="Enter your phone number">
+                        </div>
+                        <div class="field">
+                            <label>Extra Phone Number</label>
+                            <input type="tel" name="extra-phone"
+                                id="extra-phone"
+                                placeholder="Enter extra phone number">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <input type="submit" value="Sign Up">
+                    </div>
+                    <div class="signup-link">
+                        Already a member? <a href="login.html">Log In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

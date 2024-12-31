@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Reserve Car</title>
+    <link rel="stylesheet" href="forms.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body class="background">
+    <header>
+        <a href="#" class="logo"><img src="icon.png" alt="Logo"></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar">
+            <li><a href="mainlog.html">Home</a></li>
+            <li><a href="main.html">Log Out</a></li>
+            <li><a href="aboutuslog.html">About Us</a></li>
+        </ul>
+    </header>
+    <div class="background">
+        <div class="wrapper">
+            <div class="title">
+                Reserve Car
+            </div>
+            <form action="#" method="POST"name="reserveform">
+                <div class="field-group">
+                    <div class="field">
+                        <label>Pickup Date</label>
+                        <input type="date" name="pickup_date" id="pickup_date" required>
+                    </div>
+                    <div class="field">
+                        <label>Return Date</label>
+                        <input type="date" name="return_date" id="return_date" required>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <div class="field">
+                        <label>Car Brand</label>
+                        <select name="car_brand" id="car_brand" required>
+                            <option value="" disabled selected>Select a brand</option>
+                            <option value="audi">AUDI</option>
+                            <option value="bmw">BMW</option>
+                            <option value="gac">GAC</option>
+                            <option value="jac">JAC</option>
+                            <option value="hyundai">HYUNDAI</option>
+                            <option value="toyota">TOYOTA</option>
+                            <option value="kia">KIA</option>
+                            <option value="seat">SEAT</option>
+                            <option value="peugeot">PEUGEOT</option>
+                            <option value="opel">OPEL</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Car Model</label>
+                        <select name="car_model" id="car_model" required>
+                            <option value="" disabled selected>Select a model</option>
+                            <option value="sedan">Sedan</option>
+                            <option value="suv">SUV</option>
+                            <option value="truck">Truck</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <div class="field">
+                        <label>Year</label>
+                        <select name="year" id="year" required>
+                            <option value="" disabled selected>Select year</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Color</label>
+                        <select name="color" id="color" required>
+                            <option value="" disabled selected>Select a color</option>
+                            <option value="white">White</option>
+                            <option value="silver">Silver</option>
+                            <option value="grey">Grey</option>
+                            <option value="blue">Blue</option>
+                            <option value="red">Red</option>
+                            <option value="black">Black</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <div class="field">
+                        <label>Turbo</label>
+                        <select name="turbo" id="turbo" required>
+                            <option value="" disabled selected>Select option</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>CCs</label>
+                        <select name="ccs" id="ccs" required>
+                            <option value="" disabled selected>Select CC</option>
+                            <option value="1000">1000</option>
+                            <option value="1200">1200</option>
+                            <option value="1400">1400</option>
+                            <option value="1600">1600</option>
+                            <option value="2000">2000</option>
+                            <option value="2400">2400</option>
+                            <option value="2800">2800</option>
+                            <option value="3500">3500</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <div class="field">
+                        <label>Payment Method</label>
+                        <select name="payment_method" id="payment_method" required>
+                            <option value="" disabled selected>Select method</option>
+                            <option value="credit-card">Credit Card</option>
+                            <option value="paypal">PayPal</option>
+                            <option value="cash">Cash</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Branch</label>
+                        <select name="branch" id="branch" required>
+                            <option value="" disabled selected>Select branch</option>
+                            <option value>Branch</option>
+                            <option value="alexandria">Alexandria</option>
+                            <option value></option>
+                            <option value></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field">
+                    <input type="submit" value="Reserve Now">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

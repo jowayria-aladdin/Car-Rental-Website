@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+<header>
+    <a href="#" class="logo"><img src="icon.png" alt></a>
+    <div class="bx bx-menu" id="menu-icon"></div>
+    <ul class="navbar">
+        <li><a href="adminlogin.html">Admin</a></li>
+        <li><a href="signup.html">SignUp</a></li>
+        <li><a href="login.html">Log In</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+    </ul>
+</header>
+<section class="home" id="home">
+    <div class="text">
+        <h1><span></span>Looking for <br> A CAR</h1>
+        <p>You came to the right place</p>
+    </div>
+    <div class="form-container">
+        <form action="search_results.php" method="get" id="search-form">
+            <p>Choose</p>
+            <div class="box">
+                <span>Branch:</span>
+                <select name="location" id="branch">
+                    <option value="" disabled selected>Branch</option>
+                </select>
+            </div>
+            <div class="box">
+                <span>Brand:</span>
+                <select name="brand" id="brand">
+                    <option value="" disabled selected>Brand</option>
+                </select>
+            </div>
+            <div class="box">
+                <span>Model:</span>
+                <select name="model" id="model">
+                    <option value="" disabled selected>Model</option>
+                </select>
+            </div>
+            <div class="box">
+                <span>Model Year:</span>
+                <select name="year" id="year">
+                    <option value="" disabled selected>Model Year</option>
+                </select>
+            </div>
+            <div class="box">
+                <span>Color:</span>
+                <select name="color" id="color">
+                    <option value="" disabled selected>Color</option>
+                </select>
+            </div>
+            <div class="box">
+                <span>Turbo:</span>
+                <select name="turbo" id="turbo">
+                    <option value="" disabled selected>Turbo</option>
+                </select>
+            </div>
+            <div class="box">
+                <span>CCs:</span>
+                <select name="ccs" id="ccs">
+                    <option value="" disabled selected>CCs</option>
+                </select>
+            </div>
+            <button type="submit" name="search" id="search" class="btn">Search</button>
+        </form>
+    </div>
+</section>
+<section class="search-results" id="search-results">
+    <h2>Search Results</h2>
+    <div class="results-container">
+        <!-- Results will be dynamically added here -->
+    </div>
+</section>
+<section class="ride" id="ride">
+    <div class="heading">
+        <span>How to Rent a Car</span>
+        <h1>Rent With 3 Easy Steps</h1>
+    </div>
+    <div class="ride-container">
+        <div class="box">
+            <i class='bx bx-map'></i>
+            <h2>Choose a Location</h2>
+        </div>
+        <div class="box">
+            <i class='bx bxs-calendar-check'></i>
+            <h2>Pick-Up Date</h2>
+        </div>
+        <div class="box">
+            <i class='bx bxs-bookmarks'></i>
+            <h2>Book a Car</h2>
+        </div>
+    </div>
+</section>
+<script src="mainscript.js"></script>
+</body>
+</html>
