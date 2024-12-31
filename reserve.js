@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const dropdowns = ["car_brand", "year", "color", "ccs", "branch"];
+    const dropdowns = ["brand", "year", "color", "ccs", "location"];
 
     dropdowns.forEach(dropdown => {
         fetch(`reservecar.php?field=${dropdown}`)
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Fetch car models independently
-    fetch(`reservecar.php?field=car_model`)
+    fetch(`reservecar.php?field=model`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Failed to fetch car_model: ${response.statusText}`);
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return response.json();
         })
         .then(data => {
-            const modelSelect = document.getElementById("car_model");
+            const modelSelect = document.getElementById("model");
             modelSelect.innerHTML = '<option value="" disabled selected>Select a model</option>';
 
             data.forEach(model => {

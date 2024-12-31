@@ -70,7 +70,7 @@ function handleGetRequest($conn)
         echo logError("Field parameter missing");
         exit;
     }
-    $validFields = ['branch', 'car_brand', 'car_model', 'year', 'color', 'turbo', 'ccs'];
+    $validFields = ['branch', 'brand', 'model', 'year', 'color', 'turbo', 'ccs'];
 
 
 
@@ -80,7 +80,7 @@ function handleGetRequest($conn)
     }
 
     $field = $_GET['field'];
-    $validFields = ['branch', 'car_brand', 'car_model', 'year', 'color', 'turbo', 'ccs'];
+    $validFields = ['location', 'brand', 'model', 'year', 'color', 'turbo', 'ccs'];
     if (!in_array($field, $validFields)) {
         echo logError("Invalid field");
         exit;
@@ -92,13 +92,13 @@ function handleGetRequest($conn)
 
     $query = "";
     switch ($field) {
-        case "branch":
+        case "location":
             $query = "SELECT DISTINCT location AS value FROM office";
             break;
-        case "car_brand":
+        case "brand":
             $query = "SELECT DISTINCT brand AS value FROM car";
             break;
-        case "car_model":
+        case "model":
             $query = "SELECT DISTINCT model AS value FROM car";
             break;
         case "year":
@@ -132,7 +132,7 @@ function handleGetRequest($conn)
 }
 function handlePostRequest($conn)
 {
-    $requiredFields = ['email', 'pickup_date', 'return_date', 'payment_method', 'branch'];
+    $requiredFields = ['email', 'pickup_date', 'return_date', 'payment_method', 'location'];
     foreach ($requiredFields as $field) {
         if (empty($_POST[$field])) {
             echo logError("$field is required.");
@@ -178,9 +178,9 @@ function handlePostRequest($conn)
     }
 
     // Filtering based on car attributes
-    if (!empty($_POST['branch'])) {
+    if (!empty($_POST['location'])) {
         $conditions[] = "o.location = ?";
-        $params[] = $_POST['branch'];
+        $params[] = $_POST['location'];
         $types .= "s";
     }
 
